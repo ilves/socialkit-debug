@@ -1,0 +1,29 @@
+{
+  "name": "ilves/socialkit-debug",
+  "description": "The debugger extension for the Socialkit engine",
+  "keywords": [
+    "socialkit",
+    "debug",
+    "debugger"
+  ],
+  "type": "socialkit-extension",
+  "license": "BSD-3-Clause",
+  "support": {
+    "issues": "https://github.com/ilves/socialkit-debug/issues",
+    "source": "https://github.com/ilves/socialkit-debug"
+  },
+  "authors": [
+    {
+      "name": "Taavi Ilves",
+      "email": "ilves.taavi@gmail.com"
+    }
+  ],
+  "require": {
+    "yiisoft/yii2": ">=2.0.4"
+  },
+  "autoload": {
+    "psr-4": {
+      "golive\\socialkit\\debug\\": ""
+    }
+  }
+}
