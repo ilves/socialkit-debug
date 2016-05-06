@@ -11,6 +11,8 @@ class Debug extends Component
 {
     public $debugTable = 'debug';
     public $autoCreate = false;
+    public $whiteList;
+    public $blackList;
 
     public function init()
     {
@@ -21,9 +23,27 @@ class Debug extends Component
         \Yii::$app->on(Application::EVENT_AFTER_REQUEST, [$this, 'logRequest']);
     }
 
+    public function isLoggable()
+    {
+        $controllerId = \Yii::$app->controller->id;
+        $actionId = \Yii::$app->controller->action->id;
+        $key = $controllerId.'/'.$actionId;
 
+        if (is_array($this->whiteList)) {
+            return array_search($key, $this->whiteList) !== false;
+        } else if (is_array($this->blackList)) {
+            return array_search($key, $this->whiteList) === false;
+        }
+
+        return true;
+    }
+    
     public function logRequest()
     {
+        if (!$this->isLoggable()) {
+            return;
+        }
+
         $db = \Yii::$app->db;
         $request = \Yii::$app->request;
         $user = \Yii::$app->user->getIdentity();
